@@ -1,9 +1,11 @@
-function [J] = scale(I,scaleX,scaleY)
+function [J] = scaleYQ(I,scaleX,scaleY)
 %scale :设一幅大小为M×N的灰度图像I中，现要变成（放大或缩小）为 P×Q的图像J，请写出J的生成算法（要求使用双线性插值）。
 %  余乔 D201980953
-[M, N ] = size(I)
-P = fix(M * scaleX)
-Q = fix(N * scaleY)
+% 设新图J上的点(x1,y1),对应原图上的点(x,y)
+% x,y的整数部分分别为x0,y0
+[M, N ] = size(I);
+P = fix(M * scaleX);
+Q = fix(N * scaleY);
 J = zeros(P,Q);
 
 for x1 = 1:P
@@ -32,13 +34,10 @@ for x1 = 1:P
                          + I(x0 +1,y0) * (x-x0)   *  (1-y+y0)  ...
                          + I(x0,y0+1)  * (1-x+x0) *  (y-y0)    ...
                          + I(x0+1,y0+1)* (x-x0)   *  (y-y0));
-
     end
 end
 % 显示结果
-
 imshow(uint8(I));title('变换前的图像');
-fiture2,
-imshow(uint8(J));title('变换后的图像');
+figure(2),imshow(uint8(J));title('变换后的图像');
 end
 

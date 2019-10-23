@@ -1,32 +1,33 @@
-function [ outputPic ] = rotateYQ( inputPic , theta ,mode)
-    %UNTITLED2 此处显示有关此函数的摘要
-    %   此处显示详细说明
-    %计算新图大小
-    [m,n]=size(inputPic)
-    mNew = round(m * cos(theta) + n * sin(theta))
-    nNew = round(m * sin(theta) + n * cos(theta))
-    outputPic = zeros(mNew,nNew);
-    %给新图中的像素点赋值
-    for i = 1:mNew
-        for j = 1:nNew
-            % outputPic(i,j) equals the inputPic(x,y)
-            % length = distance between the old pixel and [0,0] = x^2 + y^2
-            [i,j]
-            length = sqrt((i-m+sin(theta))^2 + j^2);
-            % alpha = artan( y / x)
-            alpha = atan(j/(i - m*sin(theta)) - theta);
-            x = length * cos(alpha);
-            y = length * sin(alpha);
-            % 插值处理
-            if mode == 0 % 最邻近插值
-                xFinal = round(x);
-                yFinal = round(y);
-            end
-            if xFinal <= n && xFinal > 0 && yFinal <= m && yFinal >0
-                outputPic(i,j) = inputPic ( xFinal, yFinal );
-            end
+function [J] = rotateYQ(I,A)
+%rotate 设一幅大小为M×N的灰度图像I中，现要将其逆时针旋转 A度（角度制），得到图像J，请写出J的生成算法（要求使用近邻插值）。
+%   设I(x,y)经旋转后对应的点为J(x1,y1)
+
+% 求J的行列数P/Q
+[M, N ] = size(I);
+P = round( M * cosd(A) + N * sind(A));
+Q = round( M * sind(A) + N * cosd(A));
+J = zeros(P,Q);
+for x1 = 1:P
+    for y1 = 1:Q
+        % 求J(x1,y1)在原图I中对应的像素坐标(x,y)
+        len = sqrt(x1^2 + y1^2);
+        theta = atand(x1 / y1);
+        %x = len * sind(A + theta) - N * sind(A);
+        x = len * sind(A + theta) - N * sind(A);
+        y = len * cosd(A + theta);
+        % 最邻近插值
+        x0 = round(x);
+        y0 = round(y);
+         % 给J赋值
+        if x0 < 1 || y0 < 1 || x0 > M || y0 > N
+            J(x1,y1) = 0;
+        else
+            J(x1,y1) = I(x0,y0);
         end
     end
-    imshow(outputPic);
+end
+% 显示结果
+imshow(uint8(I));title('变换前的图像');
+figure(2),imshow(uint8(J));title('变换后的图像');
 end
 
