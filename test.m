@@ -5,7 +5,10 @@ I = rgb2gray(I);
 
 % ≤‚ ‘Àı∑≈
 %J = scaleYQ(I,1.5,1.5);
-% J = scaleYQ(I,0.5,0.5);
+%J = scaleYQ(I,0.5,0.5);
 
 %≤‚ ‘–˝◊™
- rotateYQ(I,30);
+%  rotateYQ(I,30);
+%  rotateYQ(I,160);
+%  rotateYQ(I,240);
+%  rotateYQ(I,300);
