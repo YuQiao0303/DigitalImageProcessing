@@ -26,8 +26,8 @@ for x1 = 1:P
     end
 end
 % 显示结果
-imshow(uint8(I));title('变换前的图像');
-figure(2),imshow(uint8(J));title('变换后的图像');
+imshow(uint8(I));title('原图I');
+figure(2),imshow(uint8(J));title('旋转后的图像J');
 end
 
         % 方法一：(finished)
