@@ -21,31 +21,31 @@ g = imhist(I2);
 % 4. 直方图规定化
 %J = HistogramSpecificate(I,g);
 
-% 18. 二维离散傅里叶正反变换的公式
+% 13. 二维离散傅里叶正反变换的公式
 % 略
 
-% 19. 频域滤波
-ILPF = frequencyDomainFiltering(I,30,1,1);
-GLPF = frequencyDomainFiltering(I,30,2,1);
-BLPF = frequencyDomainFiltering(I,30,3,2);
-IHPF = frequencyDomainFiltering(I,30,4,1);
-GHPF = frequencyDomainFiltering(I,30,5,1);
-BHPF = frequencyDomainFiltering(I,30,6,2);
-% 显示结果
-subplot(332)
-imshow(uint8(I));title('原图I');
-subplot(334)
-imshow(uint8(ILPF));title('ILPF');
-subplot(335)
-imshow(uint8(GLPF));title('GLPF');
-subplot(336)
-imshow(uint8(BLPF));title('BLPF');
-subplot(337)
-imshow(uint8(IHPF));title('IHPF');
-subplot(338)
-imshow(uint8(GHPF));title('GHPF');
-subplot(339)
-imshow(uint8(BHPF));title('BHPF');
+% 14. 频域滤波
+% ILPF = frequencyDomainFiltering(I,30,1,1);
+% GLPF = frequencyDomainFiltering(I,30,2,1);
+% BLPF = frequencyDomainFiltering(I,30,3,2);
+% IHPF = frequencyDomainFiltering(I,30,4,1);
+% GHPF = frequencyDomainFiltering(I,30,5,1);
+% BHPF = frequencyDomainFiltering(I,30,6,2);
+% % 显示结果
+% subplot(332)
+% imshow(uint8(I));title('原图I');
+% subplot(334)
+% imshow(uint8(ILPF));title('ILPF');
+% subplot(335)
+% imshow(uint8(GLPF));title('GLPF');
+% subplot(336)
+% imshow(uint8(BLPF));title('BLPF');
+% subplot(337)
+% imshow(uint8(IHPF));title('IHPF');
+% subplot(338)
+% imshow(uint8(GHPF));title('GHPF');
+% subplot(339)
+% imshow(uint8(BHPF));title('BHPF');
 
 % % M = 100;
 % % N = 100;
@@ -57,3 +57,9 @@ imshow(uint8(BHPF));title('BHPF');
 % % 
 % % h = ones(M,N)./(1+(sqrt((x-centerM).^2+(y-centerN).^2)/d0)^(2*n));
 % % mesh(x,y,h);
+
+% 18.区域标记
+I = imread('regionMark.bmp');
+I = [0 0 0 0 0; 1,1,1,1,1;0 0 0 0 0];
+
+J = regionMark(I);
