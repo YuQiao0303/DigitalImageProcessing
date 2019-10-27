@@ -72,20 +72,20 @@ g = imhist(I2);
 % J = regionMark(I);
 
 % 19.边界跟踪
-I = [
-    0 0 0 0 0; 
-    0,1,1,1,0;
-    0 1 1 1 0;
-    0 1 1 1 0;
-    0 1 1 1 0;
-    0 1 1 1 0;
-    0 0 0 0 0;
-    0 0 0 0 0;];
-I = imread('boundaryTrack.bmp');
-J = boundaryTracking(I);
+% I = [
+%     0 0 0 0 0; 
+%     0,1,1,1,0;
+%     0 1 1 1 0;
+%     0 1 1 1 0;
+%     0 1 1 1 0;
+%     0 1 1 1 0;
+%     0 0 0 0 0;
+%     0 0 0 0 0;];
+% I = imread('boundaryTrack.bmp');
+% J = boundaryTracking(I);
 
 
-
+% 动画测试
 % J = zeros(50,50);
 % imshow(logical(J));title('标记后的图像J');
 % for x = 1:50
@@ -94,3 +94,4 @@ J = boundaryTracking(I);
 %         imshow(logical(J));title('标记后的图像J');
 %     end
 % end
+
