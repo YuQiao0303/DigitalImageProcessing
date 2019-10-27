@@ -1,6 +1,6 @@
 function [J] = rotateYQ(I,A)
 %rotate 设一幅大小为M×N的灰度图像I中，现要将其逆时针旋转 A度（角度制），得到图像J，请写出J的生成算法（要求使用近邻插值）。
-%   设I(x,y)经旋转后对应的点为J(x1,y1)
+%   设I(x,y)经旋转后对应的点为J(x1,y1).(x0,y0)是最接近(x,y)的整数对
 % 求J的行列数P/Q
 [M, N ] = size(I);
 P = round( abs(M * cosd(A)) + abs(N * sind(A)));
@@ -10,7 +10,6 @@ J = zeros(P,Q);
 for x1 = 1:P
     for y1 = 1:Q
         % 求J(x1,y1)在原图I中对应的像素坐标(x,y)
-        % 方法三：
         x =  (x1-P*0.5) * cosd(A) +  (y1-Q*0.5)* sind(A) + M*0.5;
         y = -(x1-P*0.5) * sind(A) +  (y1-Q*0.5)* cosd(A) + N*0.5;
         

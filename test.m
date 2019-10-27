@@ -6,7 +6,7 @@ I2 = imread('tiger.png');
 I2 = rgb2gray(I2);
 g = imhist(I2);
 % 1. Ëõ·Å
-%J = scaleYQ(I,1.5,1.5);
+J = scaleYQ(I,1.5,1.5);
 %J = scaleYQ(I,0.5,0.5);
 
 % 2. Ðý×ª
@@ -72,10 +72,10 @@ g = imhist(I2);
 % J = regionMark(I);
 
 % 19.±ß½ç¸ú×Ù
-
-I = imread('boundaryTrack.bmp');
-%J = innerBoundaryTracking(I);
-J = outerBoundaryTracking(I);
+% 
+% I = imread('boundaryTrack.bmp');
+% %J = innerBoundaryTracking(I);
+% J = outerBoundaryTracking(I);
 
 % ¶¯»­²âÊÔ
 % J = zeros(50,50);
