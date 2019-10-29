@@ -7,39 +7,41 @@ J = zeros(M, N, 3);
 checked = zeros(M,N);
 currentRegion = 0;
 %填色
-colors = [254 67 101;252 157 154;249 205 173;200 200 169;131 175 155;182,194,154;138,151,123;224,208,0;229,131,8;220,87,18];
+colors = [254 67 101;252 157 154;249 205 173;200 200 169;131 175 155;138,151,123;224,208,0;229,131,8;220,87,18;182,194,154;];
 
 % 对每一个点，如果是白色1，则考察其四领域（上下左右的四个像素）中尚未被考察的点
 % 用矩阵stack表示一个栈，每行表示一个像素，第一列是像素的x坐标，第二列是像素的y坐标
 
-%第一个点入栈
-stack(1,1:2) = [1,1]; 
+%初始化栈
+stack = zeros(M*N,2); 
+stackSize = 0;
 for x = 1:M
     for y = 1:N
-        if checked(x,y) == 0 && (x~=1||y~=1)% 如果还没检查过这个点，就入栈
+        if checked(x,y) == 0 && I(x,y)==1 % 如果还没检查过这个点且是白色，就入栈
             %fprintf('顺序入栈：%d %d\n',x,y)
-            stack = [stack; [x,y]];
+            stackSize = stackSize + 1;
+            stack(stackSize,1) = x;
+            stack(stackSize,2) = y;
+            currentRegion  = currentRegion +1
+        elseif checked(x,y) == 0 && I(x,y)==0 % 如果还没检查过这个点且是黑色，就标记为已检查
+            checked(x,y) = 1;
+            continue;
+        else %已经检查过了，就跳过
+            continue;
         end
-        while(~isempty(stack)) % 若栈非空
-            currentX = stack(end,1);
-            currentY = stack(end,2);
+        while(stackSize ~= 0) % 若栈非空
+             % 出栈
+            currentX = stack(stackSize,1);
+            currentY = stack(stackSize,2);
             %fprintf('当前检查的像素：%d %d\n',currentX,currentY)
-            stack(end,:) = []; % 出栈
+            stackSize = stackSize -1;
+            
             %fprintf('因检查而出栈：%d %d\n',currentX,currentY)
             if checked(currentX,currentY) == 1 % 如果已经检查过这个点，就跳过
                 continue;
             end
             checked(currentX,currentY) = 1;%将该点标记为已检查
-            if I(currentX,currentY) == 0  % 如果是黑色点（背景色），就跳过
-                continue;
-            end
- 
-            %fprintf('\n')
-            if isempty(stack)  % 如果栈空，说明是一个新的区域
-                currentRegion = currentRegion + 1;
-            end
-            J(currentX,currentY,:) = colors(currentRegion,:);
-         
+            J(currentX,currentY,:) = colors(mod(currentRegion,10),:); %只设置了十种颜色，如果区域太多，就再从第一种颜色开始填色
             % 判断八领域像素是否已经检查过
             for neighborX = currentX-1:1:currentX+1
                 for neighborY = currentY-1:1:currentY+1
@@ -58,11 +60,16 @@ for x = 1:M
                     if tempY > N
                         tempY = N;
                     end
-                    % 若还没检查过，就入栈
-                    if checked(tempX,tempY) == 0 
-                        stack = [stack;[tempX,tempY]];
+                    % 若还没检查过且为白色，就入栈
+                    if checked(tempX,tempY) == 0  && I(tempX,tempY) == 1
+                        stackSize = stackSize+1;
+                        stack(stackSize,1) = tempX;
+                        stack(stackSize,2) = tempY;
                         %fprintf('作为%d %d的邻域入栈：%d %d\n',currentX,currentY,tempX,tempY);
+                    elseif checked(tempX,tempY) == 0  && I(tempX,tempY) == 0 %未检查，黑色
+                        checked(tempX,tempY) = 1;
                     end
+                    
                 end
             end
         end

@@ -1,5 +1,6 @@
 function [J] = scaleYQ(I,scaleX,scaleY)
 %scale :设一幅大小为M×N的灰度图像I中，现要变成（放大或缩小）为 P×Q的图像J，请写出J的生成算法（要求使用双线性插值）。
+%scaleX,scaleY表示缩放倍数
 %  余乔 D201980953
 % 设新图J上的点(x1,y1),对应原图上的点(x,y)
 % x,y的整数部分分别为x0,y0

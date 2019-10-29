@@ -4,13 +4,14 @@ I = imread('rin.png');
 I = rgb2gray(I);
 I2 = imread('tiger.png');
 I2 = rgb2gray(I2);
+%imshow(I2);
 g = imhist(I2);
 % 1. 缩放
-J = scaleYQ(I,1.5,1.5);
+%J = scaleYQ(I,0.5,1.5);
 %J = scaleYQ(I,0.5,0.5);
 
 % 2. 旋转
-  %J = rotateYQ(I,30);
+ %J = rotateYQ(I,-30);
 %  J = rotateYQ(I,160);
 %  J = rotateYQ(I,240);
 %  J = rotateYQ(I,300);
@@ -47,16 +48,7 @@ J = scaleYQ(I,1.5,1.5);
 % subplot(339)
 % imshow(uint8(BHPF));title('BHPF');
 
-% % M = 100;
-% % N = 100;
-% % d0 = 30;
-% % n = 2;
-% % centerM = fix(M/2);
-% % centerN = fix(N/2);
-% % [x,y] = meshgrid(1:M,1:N);
-% % 
-% % h = ones(M,N)./(1+(sqrt((x-centerM).^2+(y-centerN).^2)/d0)^(2*n));
-% % mesh(x,y,h);
+
 
 % 18.区域标记
 % I = [
@@ -68,14 +60,14 @@ J = scaleYQ(I,1.5,1.5);
 %     0 0 1 1 0;
 %     0 0 0 0 1;
 %     0 0 0 1 1;];
-% I = imread('regionMark.bmp');
-% J = regionMark(I);
+%I = imread('regionMark.bmp');
+%J = regionMark(I);
 
 % 19.边界跟踪
 % 
-% I = imread('boundaryTrack.bmp');
+ I = imread('boundaryTrack.bmp');
 % %J = innerBoundaryTracking(I);
-% J = outerBoundaryTracking(I);
+ J = outerBoundaryTracking(I);
 
 % 动画测试
 % J = zeros(50,50);

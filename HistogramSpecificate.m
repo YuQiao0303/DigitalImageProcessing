@@ -42,9 +42,9 @@ for x = 1:M
     end
 end
 % 显示结果
-subplot(211)
+subplot(121)
 imshow(uint8(I));title('原图I');
-subplot(212)
+subplot(122)
 imshow(uint8(J));title('规定化化后的图像J');
 end
 
